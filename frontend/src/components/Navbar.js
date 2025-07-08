@@ -10,6 +10,7 @@ const Navbar = ({ toggleTheme, theme }) => {
   const [userName, setUserName] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const currentPath = location.pathname;
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
   const routes = [
     { path: "/", label: "Home" },
@@ -22,7 +23,7 @@ const Navbar = ({ toggleTheme, theme }) => {
     const token = localStorage.getItem("token");
     if (token) {
       try {
-        const res = await fetch("http://localhost:5000/api/auth/getuser", {
+        const res = await fetch(`${backendUrl}/api/auth/getuser`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
