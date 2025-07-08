@@ -7,7 +7,7 @@ const app = express();
 const port = 5000;
 const cors = require('cors');
 app.use(cors({
-  origin: true,
+  origin: ['http://localhost:3000', 'https://secret-space-vert.vercel.app'],
   credentials: true
 }));
 app.use(express.json());
