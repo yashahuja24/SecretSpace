@@ -2,7 +2,7 @@ import NoteContext from "./noteContext";
 import { toast } from "react-toastify";
 import { useState } from "react";
 const NoteState = (props) => {
-  const host = "http://localhost:5000";
+  const host = process.env.REACT_APP_BACKEND_URL;
   const [notes, setNotes] = useState([]);
   //Fetch Notes
   const getNotes = async () => {
