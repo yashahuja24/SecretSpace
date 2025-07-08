@@ -6,6 +6,7 @@ import "./AuthStyle.css";
 const LoginSignup = () => {
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -21,8 +22,8 @@ const LoginSignup = () => {
       return toast.error("Passwords do not match");
     }
     const url = isLogin
-      ? "http://localhost:5000/api/auth/login"
-      : "http://localhost:5000/api/auth/createuser";
+      ? `${backendUrl}/api/auth/login`
+      : `${backendUrl}/api/auth/createuser`;
     const payload = isLogin
       ? { email: form.email, password: form.password }
       : { name: form.name, email: form.email, password: form.password };
