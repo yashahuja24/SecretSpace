@@ -21,8 +21,6 @@ Thumbs.db
 *.swp
 
 # Build outputs (if any)
-dist/
-build/
 
 # Optional: if using PM2 or similar
 pids/
