@@ -14,19 +14,26 @@ app.use(express.json());
 
 const port = process.env.PORT || 5000;
 
-// API routes first
+// API routes (define **before** frontend)
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/notes', require('./routes/notes'));
 
-// Serve frontend static build
-app.use(express.static(path.join(__dirname, 'build')));
+// Serve static files from React frontend (ONLY if build folder exists)
+const buildPath = path.join(__dirname, 'build');
+const fs = require('fs');
 
-// Serve frontend for all unmatched routes (after API)
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
+if (fs.existsSync(buildPath)) {
+  app.use(express.static(buildPath));
+
+  // Serve index.html for unmatched routes (after APIs)
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(buildPath, 'index.html'));
+  });
+} else {
+  console.warn("⚠️ No build folder found. Frontend won't be served.");
+}
 
 // Start server
 app.listen(port, () => {
-  console.log(`SecretSpace app listening on port ${port}`);
+  console.log(`✅ SecretSpace app listening on port ${port}`);
 });
