@@ -1,0 +1,43 @@
+# Node.js dependencies
+node_modules/
+
+# dotenv files (secrets)
+.env
+.env.local
+.env.*.local
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+
+# Build outputs (if any)
+dist/
+build/
+
+# Optional: if using PM2 or similar
+pids/
+*.pid
+
+# Coverage reports
+coverage/
+
+# MongoDB dump files
+dump/
+*.gz
+
+# Next.js or other SSR tools (if used)
+.next/
+out/
+
+# Misc
+*.tgz
