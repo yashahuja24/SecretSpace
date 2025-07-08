@@ -41,8 +41,15 @@ git clone https://github.com/your-username/secretspace.git
 cd secretspace
 
 Set up the Backend
+
 cd backend
 npm install
+Option 1: Using plain Node.js
+node index.js
+Option 2 (Recommended): Using nodemon for auto-reload
+npm install --save-dev nodemon
+npx nodemon index.js
+
 
 Create a .env file inside the backend folder with:
 
@@ -51,6 +58,7 @@ JWT_SECRET_KEY=your_jwt_secret_key
 
 
 Set up the Frontend
+
 cd ../frontend
 npm install
 npm run start
