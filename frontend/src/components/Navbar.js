@@ -10,17 +10,15 @@ const Navbar = ({ toggleTheme, theme }) => {
   const [userName, setUserName] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const currentPath = location.pathname;
-  const backendUrl = process.env.REACT_APP_BACKEND_URL;
-
   const routes = [
     { path: "/", label: "Home" },
     { path: "/about", label: "About" },
     { path: "/notes", label: "Notes" },
   ];
-
   useEffect(() => {
   const fetchUser = async () => {
     const token = localStorage.getItem("token");
+    const backendUrl = process.env.REACT_APP_BACKEND_URL;
     if (token) {
       try {
         const res = await fetch(`${backendUrl}/api/auth/getuser`, {
