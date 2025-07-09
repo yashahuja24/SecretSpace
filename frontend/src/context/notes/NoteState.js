@@ -121,7 +121,7 @@ const NoteState = (props) => {
         return note;
       });
       setNotes(updatedNotes);
-      toast.success("Note updated  successfully!");
+      toast.success("Note updated successfully!");
     } catch (error) {
       toast.error("Failed to updated  note!");
     }
