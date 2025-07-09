@@ -2,6 +2,7 @@ import NoteContext from "./noteContext";
 import { toast } from "react-toastify";
 import { useState } from "react";
 const NoteState = (props) => {
+  const {setProgress}=props;
   const host = process.env.REACT_APP_BACKEND_URL;
   const [notes, setNotes] = useState([]);
   //Fetch Notes
@@ -33,6 +34,7 @@ const NoteState = (props) => {
         return;
       }
       //API Call
+      setProgress(5);
       const response = await fetch(`${host}/api/notes/addnote`, {
         method: "POST",
         headers: {
@@ -41,14 +43,16 @@ const NoteState = (props) => {
         },
         body: JSON.stringify({ title, description, tag }),
       });
-
+      setProgress(20);
       //Logic
       const note = await response.json();
+      setProgress(50);
       setNotes(notes.concat(note));
       toast.success("Note added successfully!");
     } catch (error) {
       toast.error("Failed to add note!");
     }
+    setProgress(100);
   };
 
   //Delete Note
@@ -60,6 +64,7 @@ const NoteState = (props) => {
         return;
       }
       //API Call
+      setProgress(5);
       const response = await fetch(`${host}/api/notes/deletenote/${id}`, {
         method: "DELETE",
         headers: {
@@ -67,10 +72,11 @@ const NoteState = (props) => {
           "auth-token": token
         },
       });
+      setProgress(20);
       //TO CHECK OUTPUT IN CONSOLE(testing ke liye)
       const json = await response.json();
       console.log("Deleted Note: ",json);
-
+      setProgress(50);
       //Logic
       // console.log("Deleting a note with ", id);
       const newNotes = notes.filter((note) => {
@@ -81,6 +87,7 @@ const NoteState = (props) => {
     } catch (error) {
       toast.error("Failed to delete note!");
     }
+    setProgress(100);
   };
 
   //Update Note
@@ -92,6 +99,7 @@ const NoteState = (props) => {
         return;
       }
       //API Call
+      setProgress(5);
       const response = await fetch(`${host}/api/notes/updatenote/${id}`, {
         method: "PUT",
         headers: {
@@ -100,10 +108,11 @@ const NoteState = (props) => {
         },
         body: JSON.stringify({ title, description, tag }),
       });
+      setProgress(20);
       //TO CHECK OUTPUT IN CONSOLE(testing ke liye)
       const json = await response.json();
       console.log("Updated Note: ",json);
-
+      setProgress(50);
       // Logic to update the state and backend
       const updatedNotes = notes.map((note) => {
         if (note._id === id) {
@@ -116,6 +125,7 @@ const NoteState = (props) => {
     } catch (error) {
       toast.error("Failed to updated  note!");
     }
+    setProgress(100);
   };
   return (
     <NoteContext.Provider

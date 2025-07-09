@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "../App.css";
 import "./AuthStyle.css";
-const LoginSignup = () => {
+const LoginSignup = ({setProgress}) => {
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
   const backendUrl = process.env.REACT_APP_BACKEND_URL;
@@ -14,7 +14,7 @@ const LoginSignup = () => {
     repeat: "",
   });
   const handleChange = (e) =>
-    setForm({ ...form, [e.target.name]: e.target.value });
+  setForm({ ...form, [e.target.name]: e.target.value });
   const [showPassword, setShowPassword] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,9 +24,11 @@ const LoginSignup = () => {
     const url = isLogin
       ? `${backendUrl}/api/auth/login`
       : `${backendUrl}/api/auth/createuser`;
+    setProgress(5);
     const payload = isLogin
       ? { email: form.email, password: form.password }
       : { name: form.name, email: form.email, password: form.password };
+      setProgress(15);
     const response = await fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -42,6 +44,7 @@ const LoginSignup = () => {
     } else {
       toast.error(json.error || "Something went wrong!");
     }
+    setProgress(100);
   };
   return (
     <div className="auth-glass">
