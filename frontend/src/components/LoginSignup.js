@@ -74,6 +74,8 @@ const LoginSignup = () => {
             type={showPassword ? "text" : "password"}
             name="password"
             placeholder="Password"
+            pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}"
+            title="Password must contain at least 8 characters, including uppercase, lowercase, number, and special character."
             value={form.password}
             onChange={handleChange}
             required
